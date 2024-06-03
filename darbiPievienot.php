@@ -34,6 +34,7 @@
             <th>Apraksts</th>
             <th>Attēls</th>
             <th>Statuss</th>
+            <th>Tips</th>
             <th></th>
         </tr>
         <tbody id="darbi"></tbody>
@@ -69,6 +70,10 @@
                         <option value="active">Aktīvs</option>
                         <option value="inactive">Neaktīvs</option>
                         <option value="deleted">Dzēsts</option>
+                    </select>
+                    <select id="tips" required>
+                        <option value="Salons">Salons</option>
+                        <option value="Virsbūve">Virsbūve</option>
                     </select>
                     
                     <input type="hidden" id="darbiID">

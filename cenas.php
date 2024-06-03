@@ -30,7 +30,19 @@
 
 </header>
 
-<section>
+
+<section class="cenas" id="prices">
+    <div class="heading">
+        <span>Cenas</span>
+        <h3>Our Service Prices</h3>
+    </div>
+
+    <div class="filter-buttons">
+        <button id="salonsButton" class="filter-button" onclick="filter('Salons')">Salons</button>
+        <button id="virsbuveButton" class="filter-button" onclick="filter('Virsbūve')">Virsbūve</button>
+        <button id="allButton" class="filter-button" onclick="filter('')">Visi</button>
+    </div>
+
     <div class="tableCenas">
         <table>
             <tr>
@@ -41,7 +53,14 @@
             </tr>
 
             <?php
+            $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
+
             $visas_cenas_SQL = "SELECT * FROM cenas";
+            if ($filter == 'Salons') {
+                $visas_cenas_SQL .= " WHERE tips = 'Salons'";
+            } elseif ($filter == 'Virsbūve') {
+                $visas_cenas_SQL .= " WHERE tips = 'Virsbūve'";
+            }
             $cenu_atlase = mysqli_query($savienojums, $visas_cenas_SQL);
 
             while($cenas = mysqli_fetch_assoc($cenu_atlase)){

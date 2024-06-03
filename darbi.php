@@ -32,40 +32,49 @@
 
 
 <section class="darbi" id="courses">
-
     <div class="heading">
         <span>Mūsu darbi</span>
         <h3>Bildes no iepriekšējiem klientiem:</h3>
     </div>
 
-    <div class="box-container">
-        <?php
-            $visi_darbi_SQL = "SELECT * FROM darbi";
-            $darbu_atlase = mysqli_query($savienojums, $visi_darbi_SQL);
-
-            while($darbi = mysqli_fetch_assoc($darbu_atlase)){
-                if($darbi["darbs_statuss"] == "active") {
-                echo "
-                <div class='box'>
-                    <div class='image'>
-                        <img src='{$darbi['darbs_attels']}'>
-                    </div>
-                    <div class='content'>
-                        <h3>{$darbi['darbs_nosaukums']}</h3>
-                        <p>{$darbi['darbs_apraksts']}</p>
-                        <a href='kontakti.php'>
-                            <button name='pieteikties' class='btn btnApply'>Pieteikties</button>
-                        </a>
-                    </div>
-                </div>
-                ";
-            }
-        }
-        ?>
-
-  
+    <div class="filter-buttons">
+        <button id="salonsButton" class="filter-button" onclick="filter('Salons')">Salons</button>
+        <button id="virsbuveButton" class="filter-button" onclick="filter('Virsbūve')">Virsbūve</button>
+        <button id="allButton" class="filter-button" onclick="filter('')">Visi</button>
     </div>
 
+    <div class="box-container">
+        <?php
+            $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
+
+            $visi_darbi_SQL = "SELECT * FROM darbi";
+            if ($filter == 'Salons') {
+                $visi_darbi_SQL .= " WHERE tips = 'Salons'";
+            } elseif ($filter == 'Virsbūve') {
+                $visi_darbi_SQL .= " WHERE tips = 'Virsbūve'";
+            }
+            $darbu_atlase = mysqli_query($savienojums, $visi_darbi_SQL);
+
+            while ($darbi = mysqli_fetch_assoc($darbu_atlase)) {
+                if ($darbi["darbs_statuss"] == "active") {
+                    echo "
+                    <div class='box'>
+                        <div class='image'>
+                            <img src='{$darbi['darbs_attels']}'>
+                        </div>
+                        <div class='content'>
+                            <h3>{$darbi['darbs_nosaukums']}</h3>
+                            <p>{$darbi['darbs_apraksts']}</p>
+                            <a href='kontakti.php'>
+                                <button name='pieteikties' class='btn btnApply'>Pieteikties</button>
+                            </a>
+                        </div>
+                    </div>
+                    ";
+                }
+            }
+        ?>
+    </div>
 </section>
 
 </body>

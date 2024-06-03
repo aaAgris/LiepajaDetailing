@@ -1,8 +1,10 @@
+
 $(document).ready(function(){
     //console.log("jQuery strādā!")
     let edit = false;
     fetchCenas()
     fetchDarbi()
+    fetchPieteikumi()
 
 
     $(document).on('click', '#newDarbi', (e) => {
@@ -60,6 +62,7 @@ $(document).ready(function(){
                             <td>${darbi.apraksts}</td>
                             <td>${darbi.attels}</td>
                             <td>${darbi.statuss}</td>
+                            <td>${darbi.tips}</td>
                             <td>
                                 <a href="#" class="darbi-item btn-edit"><i class="fa fa-edit"></i></a> 
                                 <a href="#" class="darbi-delete btn-delete"><i class="fa fa-trash"></i></a> 
@@ -84,6 +87,7 @@ $(document).ready(function(){
             $('#apraksts').val(darbs.apraksts)
             $('#attels').val(darbs.attels)
             $('#statuss').val(darbs.statuss)
+            $('#tips').val(darbs.tips)
             $('#darbiID').val(darbs.id)
             edit = true
         })
@@ -97,6 +101,7 @@ $(document).ready(function(){
             apraksts: $('#apraksts').val(),
             attels: $('#attels').val(),
             statuss: $('#statuss').val(),
+            tips: $('#tips').val(),
             id: $('#darbiID').val()
         }
         const url = edit === false ? 'crud/darbi-add.php' : 'crud/darbi-edit.php'
@@ -123,4 +128,102 @@ $(document).ready(function(){
         }
     })
 
+    function fetchPieteikumi() {
+        $.ajax({
+            url: 'crud/pieteikumi-list.php',
+            type: 'GET',
+            success: function(response) {
+                const pieteikumi = JSON.parse(response);
+                let template = '';
+                pieteikumi.forEach(pieteikums => {
+                    template += `
+                        <tr pieteikumiID="${pieteikums.id}">
+                            <td>${pieteikums.id}</td>
+                            <td>${pieteikums.vards}</td>
+                            <td>${pieteikums.uzvards}</td>
+                            <td>${pieteikums.epasts}</td>
+                            <td>${pieteikums.talrunis}</td>
+                            <td>${pieteikums.komentari}</td>
+                            <td>${pieteikums.auto_tiriba}</td>
+                            <td>${pieteikums.bildes}</td>
+                            <td>${pieteikums.tags}</td>
+                            <td>${pieteikums.datums}</td>
+                            <td>${pieteikums.laiks}</td>
+                            <td>
+                                <a href="#" class="pieteikumi-item btn-edit"><i class="fa fa-edit"></i></a> 
+                                <a href="#" class="pieteikumi-delete btn-delete"><i class="fa fa-trash"></i></a> 
+                                <a href="#" class="pieteikumi-bill btn-bill"><i class="fa fa-check"></i></a> 
+                            </td>
+                        </tr>
+                    `;
+                });
+    
+                $('#pieteikumi').html(template);
+            }
+        });
+    }
+    
+    $(document).on('click', '.pieteikumi-item', function(e) {
+        $(".modal").css('display', 'flex');
+        const element = $(e.currentTarget).closest('tr');
+        const id = $(element).attr('pieteikumiID');
+        $.post('crud/pieteikumi-single.php', { id }, (response) => {
+            const pieteikums = JSON.parse(response);
+            $('#vards').val(pieteikums.vards);
+            $('#uzvards').val(pieteikums.uzvards);
+            $('#epasts').val(pieteikums.epasts);
+            $('#talrunis').val(pieteikums.talrunis);
+            $('#komentari').val(pieteikums.komentari);
+            $('#auto_tiriba').val(pieteikums.auto_tiriba);
+            $('#tags').val(pieteikums.tags.split(', '));
+            $('#datums').val(pieteikums.datums);
+            $('#laiks').val(pieteikums.laiks);
+            $('#bildes').val(pieteikums.bildes); // This assumes bildes field can accept a value. Adjust if it's a file input.
+            $('#pieteikumiID').val(pieteikums.id);
+            edit = true;
+        });
+        e.preventDefault();
+    });
+    
+    $('#pieteikumiForma').submit(e => {
+        e.preventDefault();
+        const postData = {
+            vards: $('#vards').val(),
+            uzvards: $('#uzvards').val(),
+            epasts: $('#epasts').val(),
+            talrunis: $('#talrunis').val(),
+            komentari: $('#komentari').val(),
+            auto_tiriba: $('#auto_tiriba').val(),
+            tags: $('#tags').val().join(', '),
+            datums: $('#datums').val(),
+            laiks: $('#laiks').val(),
+            id: $('#pieteikumiID').val()
+        };
+        const url = edit === false ? 'crud/pieteikumi-add.php' : 'crud/pieteikumi-edit.php';
+        console.log(postData, url);
+        $.post(url, postData, (response) => {
+            $("#pieteikumiForma").trigger('reset');
+            fetchPieteikumi();
+            $(".modal").hide();
+            edit = false;
+        });
+    });
+    
+    $(document).on('click', '.pieteikumi-delete', function(e) {
+        if (confirm('Vai tiešām vēlies dzēst šo ierakstu?')) {
+            const element = $(e.currentTarget).closest('tr');
+            const id = $(element).attr('pieteikumiID');
+            $.post('crud/pieteikumi-delete.php', { id }, (response) => {
+                console.log(response);
+                fetchPieteikumi();
+            });
+        }
+    });
+    
+    $(document).ready(function() {
+        fetchPieteikumi();
+    });
+
 })
+
+
