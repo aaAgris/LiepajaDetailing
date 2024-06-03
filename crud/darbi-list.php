@@ -25,6 +25,7 @@
             'apraksts' => $row['darbs_apraksts'],
             'attels' => $row['darbs_attels'],
             'statuss' => $row['darbs_statuss'],
+            'tips' => $row['tips'],
             'id' => $row['darbs_id']
         );
     }

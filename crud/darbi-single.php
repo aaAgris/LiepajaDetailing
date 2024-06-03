@@ -18,6 +18,7 @@
                 'apraksts' => $row['darbs_uzvards'],
                 'attels' => $row['darbs_epasts'],
                 'statuss' => $row['darbs_statuss'],
+                'tips' => $row['darbs_tips'],
                 'id' => $row['darbs_id']
             );
         }

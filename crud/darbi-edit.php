@@ -8,12 +8,14 @@
         $darbs_apraksts = $_POST['darbs_apraksts'];
         $darbs_attels = $_POST['darbs_attels'];
         $darbs_statuss = $_POST['darbs_statuss'];
+        $darbs_tips = $_POST['tips'];
 
         
         $update_darbs_SQL = "UPDATE darbi SET 
         darbs_nosaukums = '$darbs_nosaukums',
         darbs_apraksts = '$darbs_apraksts',
         darbs_attels = '$darbs_attels',
+        tips = '$darbs_tips',
         darbs_statuss = '$darbs_statuss' WHERE kursa_id = $darbs_id";
         $update_darbs_result = mysqli_query($savienojums, $update_darbs_SQL);
 

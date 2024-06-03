@@ -14,6 +14,7 @@
         <a href="index1.php"> <i class="fas fa-home"></i>Sākums </a>
         <a href="cenasPievienot.php"> <i class="fas fa-tasks"></i>Cenas </a>
         <a href="darbiPievienot.php"> <i class="fas fa-database"></i>Darbi </a>
+        <a href="pieteikumiAdmin.php"> <i class="fas fa-database"></i>Pieteikumi </a>
         <?php 
         if($_SESSION['loma_LYXQT'] == "owner"){
           echo '<a href="lietotaji.php"><i class="fa fa-users"></i> Lietotāji</a>';
