@@ -1,7 +1,7 @@
 <?php
 require('../connectDB.php');
 
-if(isset($_POST['vards'])){
+if(isset($_POST['id'])){
     // Sanitize inputs
     $vards = mysqli_real_escape_string($savienojums, $_POST['vards']);
     $uzvards = mysqli_real_escape_string($savienojums, $_POST['uzvards']);
