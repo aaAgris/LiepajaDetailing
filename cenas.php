@@ -26,6 +26,7 @@
         <a href="darbi.php"> <i class="fas fa-angle-right"></i>Mūsu darbi </a>
         <a href="kontakti.php"> <i class="fas fa-angle-right"></i>Pieteikt auto </a>
         <a href="vakances.php"> <i class="fas fa-angle-right"></i>Vakances </a>
+        <a href="login.php"> <i class="fas fa-angle-left"></i>Ielogoties </a>
     </nav>
 
 </header>
@@ -79,6 +80,48 @@
         </table>
     </div>
 </section>
+
+<footer class="footer">
+    <div class="footer-content">
+        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+        <p><i class="fas fa-phone"></i> +371 12345678</p>
+        <p><i class="fas fa-globe"></i> www.liepajadetailing.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> Liepaja, Latvia</p>
+        <div id="map"></div>
+    </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.image-carousel').slick({
+            dots: true,
+            infinite: true,
+            speed: 1,
+            slidesToShow: 1,
+            adaptiveHeight: true
+        });
+    });
+
+    // Initialize Google Map
+    function initMap() {
+        var location = {lat: 56.504667, lng: 21.010833};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 14,
+            center: location
+        });
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map
+        });
+    }
+
+    window.initMap = initMap;
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" defer></script>
 
 </body>
 </html>
