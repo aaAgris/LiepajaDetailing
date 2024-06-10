@@ -40,3 +40,18 @@ Mūsu galvenais mērķis ir dot mājaslapas lietotājiem viegli saprotamu, un ē
 <br>
 
 Attēlā ir redzama lietotāja puse mājaslapai, tā ir vienkārša, lai palielinātu klienta vēlmi izmantot mājaslapu. Ja gadījumā būtu par daudz lieku pogu vai bilžu, klients izvēlētos iet citur.
+
+<br>
+
+### Izmantotās tehnoloģijas
+
+Projektā tika izmantotas dažādas tehnoloģijas, bet nekas jauns. Izmantoju programmatūras un valodas ar kurām man jau ir pierdze, lai mazliet atvieglotu savu darbu.
+
+Dažas no izmantotajām tehnoloģijām, rīkiem un valodām : 
+* Visual Studio Code - tas tika izvēlēts, jo tas ir labs koda redaktors ar daudz funkcijām un spraudņiem darba atvieglošanai.
+* PHP - tas tika izvēlēts jo ar to jau bija pieredze un vietas no kurām smelties idejas.
+* HTML, CSS, Javascript - šeit arī ir līdzīgi, izmantoju jau sev zināmas tehnoloģijas.
+
+<br>
+
+Protams ir arī vēl lietas, lietotnes UML diagrammu veidošanai, datu bāžu pārvaldības sistēma, bet pārsvarā ir paturēti standarta mājaslapu izstrādes rīki.
