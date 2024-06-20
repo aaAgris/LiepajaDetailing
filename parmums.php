@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liepaja Detailing</title>
+    <title>Par mums - Liepaja Detailing</title>
     <link rel="shortcut icon" href="images/icon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick-theme.css"/>
     <script src="script.js" defer></script> 
-
 </head>
 <body>
 <?php
@@ -30,6 +31,18 @@
     </nav>
 
 </header>
+
+<div class="about-content">
+    <h1>Par mums</h1>
+    <p>
+    Mēs lepojamies ar mūsu augstajiem standartiem un precīzumu, nodrošinot, ka ikviens automašīnas īpašnieks saņem optimālo rezultātu. Mūsu profesionālie pakalpojumi ietver rūpīgu automašīnu detaļu tīrīšanu, kas ne tikai uzlabo automašīnas izskatu, bet arī aizsargā tās virsmu no kaitīgiem faktoriem.
+    </p>
+    <br>
+    <p>
+    Mēs pievēršam īpašu uzmanību katram detalizācijas solim, sākot no rūpīgas degļu tīrīšanas līdz smalkai virsmu polēšanai. Katrs mūsu darbinieks ir apmācīts un apveltīts ar izcilām prasmēm, lai nodrošinātu visaugstāko pakalpojumu kvalitāti un klientu apmierinātību.
+    </p>
+</div>
+
 <footer class="footer">
     <div class="footer-content">
         <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -42,7 +55,7 @@
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel/slick/slick.min.js"></script>
 <script>
     $(document).ready(function(){
         $('.image-carousel').slick({
@@ -70,6 +83,6 @@
     window.initMap = initMap;
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBG-Ryk1QNLu5Zo-tiiNoEu9875oq78mak&callback=initMap" defer></script>
 </body>
 </html>

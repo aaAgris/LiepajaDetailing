@@ -1,11 +1,13 @@
 <?php
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
+}
+
     if(!isset($_SESSION['lietotajvards_LYXQT'])){
         header("Refresh:0; url=login.php");
         exit();
     }
 ?>
-<div id="menu-btn" class="fas fa-bars"></div>
 
 <header class="header">
     <a href="#" class="logo"> <i class="fa fa-car"></i> LPD Admin </a>
@@ -19,7 +21,7 @@
         <a href="cvAdmin.php"> <i class="fas fa-tasks"></i> Jauni Darbinieki </a>
         <?php 
         if($_SESSION['loma_LYXQT'] == "owner"){
-          echo '<a href="lietotaji.php"><i class="fa fa-users"></i> Lietotāji</a>';
+          echo '<a href="lietotajiAdmin.php"><i class="fa fa-users"></i> Lietotāji</a>';
         }
       ?>
         <a href="profils.php"> <i class="fas fa-user"></i>Profils </a>

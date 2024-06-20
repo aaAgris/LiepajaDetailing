@@ -31,14 +31,15 @@
 
                     if(mysqli_num_rows($atrasanas_rezultats) == 1){
                         while($ieraksts = mysqli_fetch_assoc($atrasanas_rezultats)){
-                            if($ieraksts["statuss"]== "deleted"){
-                                echo "Lietotājs ir dzēsts!";
+                            if($ieraksts["statuss"]== "deleted" || $ieraksts["statuss"]== "inactive" ){
+                                echo "Lietotājs ir dzēsts vai neaktīvs!";
                             }else{
 
                             
                             if(password_verify($Parole, $ieraksts["parole"])){
                                 $_SESSION["lietotajvards_LYXQT"] = $ieraksts["lietotajvards"];
                                 $_SESSION["loma_LYXQT"] = $ieraksts["loma"];
+                                $_SESSION["id_LYXQT"] = $ieraksts["id"];
                                 header("location:index1.php");
                             }else{
                                 echo "Nepareizs lietotājs vai parole!";

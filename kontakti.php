@@ -78,6 +78,13 @@
     </form>
 </section>
 
+<div id="echo-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="echo-message"></p>
+    </div>
+</div>
+
 <?php
 
 if(isset($_POST["pieteikties"])){
@@ -110,9 +117,8 @@ if(isset($_POST["pieteikties"])){
                 while ($row = mysqli_fetch_assoc($result_available_times)) {
                     $available_times[] = $row['laiks'];
                 }
-                echo json_encode(array('error' => 'Laiks nav pieejams', 'available_times' => $available_times));
-            } else {
-                echo json_encode(array('error' => 'Database error: ' . mysqli_error($savienojums)));
+                $available_times_str = implode(", ", $available_times);
+                $message = "Laiks nav pieejams. Aizņemtie laiki: $available_times_str";
             }
         } else {
             // Handle file uploads (already handled in your original implementation)
@@ -152,8 +158,6 @@ if(isset($_POST["pieteikties"])){
                     mysqli_query($savienojums, $link_sql);
                 }
 
-
-                
                 $phpmailer = new PHPMailer();
                 $phpmailer->isSMTP();
                 $phpmailer->Host = 'live.smtp.mailtrap.io';
@@ -181,23 +185,22 @@ if(isset($_POST["pieteikties"])){
                 ";
 
                 if($phpmailer->send()) {
-                    echo "<p>Pieteikums veiksmīgi pievienots un apstiprinājuma e-pasts nosūtīts!</p>";
+                    $message = "Pieteikums veiksmīgi pievienots un apstiprinājuma e-pasts nosūtīts!";
                 } else {
-                    echo "<p>Pieteikums veiksmīgi pievienots, bet e-pasta nosūtīšana neizdevās: " . $phpmailer->ErrorInfo . "</p>";
+                    $message = "Pieteikums veiksmīgi pievienots, bet e-pasta nosūtīšana neizdevās ";
                 }
-
-                echo "<script>
-                        setTimeout(function(){
-                            window.location.reload();
-                        }, 3000);
-                      </script>";
             } else {
-                echo "<p>Kļūda pievienojot pieteikumu: " . mysqli_error($savienojums) . "</p>";
+                $message = "Kļūda pievienojot pieteikumu: ";
             }
         }
     } else {
-        echo "<p>Izvēlētais datums nav darba diena (P-O-P-C-Pk).</p>";
+        $message = "Izvēlētais datums nav darba diena (P-O-P-C-Pk).";
     }
+
+    echo "<script>
+    document.getElementById('echo-message').innerText = '$message';
+    document.getElementById('echo-modal').style.display = 'block';
+  </script>";
 }
 ?>
 
@@ -241,6 +244,28 @@ if(isset($_POST["pieteikties"])){
     window.initMap = initMap;
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBG-Ryk1QNLu5Zo-tiiNoEu9875oq78mak&callback=initMap" defer></script>
+
+<!-- Add the following script to handle the modal close functionality -->
+<script>
+    // Get the modal
+    var modal = document.getElementById("echo-modal");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
 </body>
 </html>

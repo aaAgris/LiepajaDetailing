@@ -18,12 +18,6 @@
     require("navigation.php");
   ?>   
 
-<div class="title">
-    <div class="name">
-        <p>Pieteikumi</p>
-    </div>
-    <button class="btn" id="newPieteikumi">Pievienot jaunu</button>
-</div>
 
 <div class="container1">
     <table>
@@ -35,7 +29,7 @@
             <th>Tālrunis</th>
             <th>Komentāri</th>
             <th>Auto tīrība</th>
-            <th>Bildes</th>
+            <th>Bilde</th>
             <th>Tags</th>
             <th>Datums</th>
             <th>Laiks</th>

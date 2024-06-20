@@ -1,16 +1,3 @@
-<!DOCTYPE html>
-<html lang="lv">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liepaja Detailing</title>
-    <link rel="shortcut icon" href="images/icon.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script> 
-</head>
-<body>
 <?php
     require("connectDB.php");
     require 'PHPMailer/src/Exception.php';
@@ -87,6 +74,14 @@
     </div>
 </div>
 
+<!-- Echo Message Modal -->
+<div id="echo-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="echo-message"></p>
+    </div>
+</div>
+
 <?php
 if (isset($_POST["pieteikties"])) {
     $vacancy_id = mysqli_real_escape_string($savienojums, $_POST['vacancy_id']);
@@ -108,11 +103,10 @@ if (isset($_POST["pieteikties"])) {
                 $phpmailer->Password = '192b3b77f3bec7e872f54820797d620f';
                 $phpmailer->CharSet = 'UTF-8';
 
-                $phpmailer->setFrom('mailtrap@demomailtrap.com', 'Liepaja Detailing'); // Replace with your email and name
-                $phpmailer->addAddress($epasts_ievade, $vards_ievade . ' ' . $uzvards_ievade); // Add recipient
+                $phpmailer->setFrom('mailtrap@demomailtrap.com', 'Liepaja Detailing'); 
+                $phpmailer->addAddress($epasts_ievade, $vards_ievade . ' ' . $uzvards_ievade);
                 $phpmailer->isHTML(true);
 
-        // Get the job title from the vacancies table
         $vacancy_query = "SELECT title FROM vacancies WHERE id = '$vacancy_id'";
         $vacancy_result = mysqli_query($savienojums, $vacancy_query);
         $vacancy_row = mysqli_fetch_assoc($vacancy_result);
@@ -122,19 +116,18 @@ if (isset($_POST["pieteikties"])) {
         $phpmailer->Body    = "<h1>Pieteikums saņemts</h1><p>Paldies, ka pieteicāties vakancei: {$vacancy_title}</p>";
 
         if ($phpmailer->send()) {
-            echo "<p>Pieteikums veiksmīgi pievienots un apstiprinājuma e-pasts nosūtīts!</p>";
+            $message = "Pieteikums veiksmīgi pievienots un apstiprinājuma e-pasts nosūtīts!";
         } else {
-            echo "<p>Pieteikums veiksmīgi pievienots, bet e-pasta nosūtīšana neizdevās: " . $phpmailer->ErrorInfo . "</p>";
+            $message = "Pieteikums veiksmīgi pievienots, bet e-pasta nosūtīšana neizdevās: " . $phpmailer->ErrorInfo;
         }
-
-        echo "<script>
-                setTimeout(function(){
-                    window.location.reload();
-                }, 3000);
-              </script>";
     } else {
-        echo "<p>Kļūda pievienojot pieteikumu: " . mysqli_error($savienojums) . "</p>";
+        $message = "Kļūda pievienojot pieteikumu: " . mysqli_error($savienojums);
     }
+
+    echo "<script>
+            document.getElementById('echo-message').innerText = '$message';
+            document.getElementById('echo-modal').style.display = 'block';
+          </script>";
 }
 ?>
 
@@ -152,22 +145,22 @@ if (isset($_POST["pieteikties"])) {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function(){
-        // Open modal on apply button click
+        // Open apply modal on apply button click
         $('.apply-button').on('click', function() {
             var vacancyId = $(this).data('vacancy-id');
             $('#vacancy_id').val(vacancyId);
             $('#apply-modal').show();
         });
 
-        // Close modal on close button click
+        // Close modals on close button click
         $('.close').on('click', function() {
-            $('#apply-modal').hide();
+            $(this).closest('.modal').hide();
         });
 
         // Close modal when clicking outside the modal content
         $(window).on('click', function(event) {
-            if ($(event.target).is('#apply-modal')) {
-                $('#apply-modal').hide();
+            if ($(event.target).is('.modal')) {
+                $(event.target).hide();
             }
         });
     });
@@ -198,6 +191,6 @@ if (isset($_POST["pieteikties"])) {
         });
     }
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBG-Ryk1QNLu5Zo-tiiNoEu9875oq78mak&callback=initMap" defer></script>
 </body>
 </html>

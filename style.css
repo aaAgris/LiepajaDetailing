@@ -90,11 +90,11 @@ html::-webkit-scrollbar-thumb {
 }
 
 .header .navbar a:hover {
-  color: #ff0;
+  color: rgb(53, 53, 51);
 }
 
 .header .navbar a:hover i {
-  color: #ff0;
+  color: rgb(53, 53, 51);
 }
 
 /* Responsive Navbar */
@@ -215,13 +215,13 @@ html::-webkit-scrollbar-thumb {
 }
 
 .modal input[type="submit"] {
-  background-color: #007bff;
+  background-color: var(--maincolor);
   color: white;
   cursor: pointer;
 }
 
 .modal input[type="submit"]:hover {
-  background-color: #0056b3;
+  background-color: #afa510;
 }
 
 .close_modal {
@@ -382,7 +382,7 @@ input[type="file"] {
 }
 
 .apply input[type="submit"] {
-  background-color: #4caf50;
+  background-color:var(--maincolor);
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -391,7 +391,7 @@ input[type="file"] {
 }
 
 .apply input[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: #9e9514;
 }
 
 .vacancy-container {
@@ -870,4 +870,27 @@ input[type="file"] {
 
 .apply-button:hover {
     background-color: #c3e600;
+}
+
+.about-content {
+  margin-top: 13rem;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+}
+
+.about-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.about-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.btn5{
+  margin-top: 13rem;
 }

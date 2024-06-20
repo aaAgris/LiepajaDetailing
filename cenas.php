@@ -1,3 +1,7 @@
+<?php
+require("connectDB.php");
+?>
+
 <!DOCTYPE html>
 <html lang="lv">
 <head>
@@ -12,10 +16,6 @@
 
 </head>
 <body>
-<?php
-    require("connectDB.php");
-?>
-
 <header class="header">
     <a href="#" class="logo"> <i class="fa fa-circle"></i> Liepaja Detailing </a>
 
@@ -56,19 +56,23 @@
             <?php
             $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
 
-            $visas_cenas_SQL = "SELECT * FROM cenas";
+            $visas_cenas_SQL = "SELECT cenas.*, veicdarbi.darbs AS darbs_name 
+                                FROM cenas 
+                                JOIN veicdarbi ON cenas.darbs = veicdarbi.id";
+
             if ($filter == 'Salons') {
-                $visas_cenas_SQL .= " WHERE tips = 'Salons'";
+                $visas_cenas_SQL .= " WHERE cenas.tips = 'Salons'";
             } elseif ($filter == 'Virsbūve') {
-                $visas_cenas_SQL .= " WHERE tips = 'Virsbūve'";
+                $visas_cenas_SQL .= " WHERE cenas.tips = 'Virsbūve'";
             }
+
             $cenu_atlase = mysqli_query($savienojums, $visas_cenas_SQL);
 
             while($cenas = mysqli_fetch_assoc($cenu_atlase)){
                 if($cenas["statuss"] == "active") {
                     echo "
                     <tr>
-                        <td>{$cenas['darbs']}</td>
+                        <td>{$cenas['darbs_name']}</td>
                         <td>{$cenas['apraksts']}</td>
                         <td>{$cenas['cena1']}</td>
                         <td>{$cenas['cena2']}</td>
@@ -121,7 +125,7 @@
     window.initMap = initMap;
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBG-Ryk1QNLu5Zo-tiiNoEu9875oq78mak&callback=initMap" defer></script>
 
 </body>
 </html>

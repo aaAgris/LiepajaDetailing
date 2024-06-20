@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script> 
-
 </head>
 <body>
 <?php
@@ -28,9 +27,7 @@
         <a href="vakances.php"> <i class="fas fa-angle-right"></i>Vakances </a>
         <a href="login.php"> <i class="fas fa-angle-left"></i>Ielogoties </a>
     </nav>
-
 </header>
-
 
 <section class="darbi" id="courses">
     <div class="heading">
@@ -48,12 +45,15 @@
         <?php
             $filter = isset($_GET['filter']) ? $_GET['filter'] : '';
 
-            $visi_darbi_SQL = "SELECT * FROM darbi";
+            $visi_darbi_SQL = "SELECT darbi.*, veicdarbi.darbs AS veicdarbi_darbs 
+                               FROM darbi 
+                               JOIN veicdarbi ON darbi.darbs_nosaukums = veicdarbi.id";
             if ($filter == 'Salons') {
-                $visi_darbi_SQL .= " WHERE tips = 'Salons'";
+                $visi_darbi_SQL .= " WHERE darbi.tips = 'Salons'";
             } elseif ($filter == 'Virsbūve') {
-                $visi_darbi_SQL .= " WHERE tips = 'Virsbūve'";
+                $visi_darbi_SQL .= " WHERE darbi.tips = 'Virsbūve'";
             }
+
             $darbu_atlase = mysqli_query($savienojums, $visi_darbi_SQL);
 
             while ($darbi = mysqli_fetch_assoc($darbu_atlase)) {
@@ -64,7 +64,7 @@
                             <img src='{$darbi['darbs_attels']}'>
                         </div>
                         <div class='content'>
-                            <h3>{$darbi['darbs_nosaukums']}</h3>
+                            <h3>{$darbi['veicdarbi_darbs']}</h3>
                             <p>{$darbi['darbs_apraksts']}</p>
                             <a href='kontakti.php'>
                                 <button name='pieteikties' class='btn btnApply'>Pieteikties</button>
@@ -118,7 +118,7 @@
     window.initMap = initMap;
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBG-Ryk1QNLu5Zo-tiiNoEu9875oq78mak&callback=initMap" defer></script>
 
 </body>
 </html>

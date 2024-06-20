@@ -19,7 +19,7 @@
 
 <div class="title">
     <div class="name">
-        <p>CVs</p>
+        <p></p>
     </div>
 </div>
 
@@ -41,7 +41,8 @@
         <tbody id="cvs"></tbody>
     </table>
 
-    <div class="modal">
+    <!-- Edit Modal -->
+    <div class="modal" id="editModal">
         <div class="apply">
             <div class="close_modal"><i class="fas fa-times"></i></div>
             <h2>CV</h2>
@@ -71,22 +72,22 @@
         </div>
     </div>
     
-</div>
-<div class="modal" id="billModal">
-    <div class="apply">
-        <div class="close_modal"><i class="fas fa-times"></i></div>
-        <h2>CV Pieteikums</h2>
-        <form id="billForm">
-            <input type="hidden" id="cvIDModal" name="cvID">
-            <label>Pieteikumu:</label>
-            <select id="actionSelect" name="action">
-                <option value="accept">Apstiprināt</option>
-                <option value="reject">Noliegt</option>
-            </select>
-            <button type="submit" class="btn">Iesniegt</button>
-        </form>
+    <div class="modal" id="billModal">
+        <div class="apply">
+            <div class="close_modal"><i class="fas fa-times"></i></div>
+            <h2>CV Pieteikums</h2>
+            <form id="billForm">
+                <input type="hidden" id="cvIDModal" name="cvID">
+                <label>Pieteikumu:</label>
+                <select id="actionSelect" name="action">
+                    <option value="accept">Apstiprināt</option>
+                    <option value="reject">Noliegt</option>
+                </select>
+                <button type="submit" class="btn">Iesniegt</button>
+            </form>
+        </div>
     </div>
-</div>
 
+</div>
 </body>
 </html>

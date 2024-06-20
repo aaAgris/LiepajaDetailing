@@ -60,7 +60,7 @@ require("navigation.php");
                     </select>
                     <input type="hidden" id="vacancyID">
                 </div>
-                <input type="submit" value="Saglabāt" class="btn">
+                <input type="submit" name="pieteikties" value="Saglabāt" class="btn">
             </form>
         </div>
     </div>
