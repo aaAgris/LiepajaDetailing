@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['filePath'], $_POST['pieteikumiID']) && !empty($_POST['pieteikumiID'])) {
         // Escape pieteikumiID to prevent SQL injection
         $pieteikumiID = mysqli_real_escape_string($savienojums, $_POST['pieteikumiID']);
+        $filePath = mysqli_real_escape_string($savienojums, $_POST['filePath']);
 
         // Retrieve pieteikumi details from the database
         $select_pieteikumi_SQL = "SELECT * FROM pieteikumi WHERE id = $pieteikumiID";

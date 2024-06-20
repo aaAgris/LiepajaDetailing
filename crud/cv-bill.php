@@ -1,5 +1,5 @@
 <?php
-require('../connectDB.php'); // Adjust the path as per your file structure
+require('../connectDB.php'); 
 require '../PHPMailer/src/Exception.php';
 require '../PHPMailer/src/PHPMailer.php';
 require '../PHPMailer/src/SMTP.php';
@@ -73,7 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         die("Kļūda! Nepareiza darbība.");
     }
-
 
     try {
         $phpmailer->isSMTP();

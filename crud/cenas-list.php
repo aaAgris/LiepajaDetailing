@@ -1,35 +1,17 @@
 <?php
-    require('../connectDB.php');
-    
-    $select_cenas_SQL = "SELECT * FROM cenas ORDER BY id DESC";
-    $select_cenas_result = mysqli_query($savienojums, $select_cenas_SQL);
+require('../connectDB.php');
 
-    if(!$select_cenas_result){
-        die("Kļūda!");
-    }
+$query = "SELECT cenas.id, veicdarbi.darbs, cenas.apraksts, cenas.cena1, cenas.cena2, cenas.statuss 
+          FROM cenas 
+          JOIN veicdarbi ON cenas.darbs = veicdarbi.id";
+$result = mysqli_query($savienojums, $query);
 
-    while($row = mysqli_fetch_array($select_cenas_result)){
-        $darb_Id = $row["id"];
-        $select_darbs_SQL2 = "SELECT darbs FROM veicdarbi WHERE id = '$darb_Id'";
-        $select_darbs_result1 = mysqli_query($savienojums, $select_darbs_SQL2);
+$cenas = array();
+while ($row = mysqli_fetch_assoc($result)) {
+    $cenas[] = $row;
+}
 
-        $darb = '';
+echo json_encode($cenas);
 
-        while($rowCena = mysqli_fetch_array( $select_darbs_result1)){
-            $darb = $rowCena[0];
-        }
-
-        $json[] = array(
-            'darbs' => $row['darbs'],
-            // 'darbi' => $darb,
-            'apraksts' => $row['apraksts'],
-            'cena1' => $row['cena1'],
-            'cena2' => $row['cena2'],
-            'statuss' => $row['statuss'],
-            'id' => $row['id']
-        );
-    }
-
-    $jsonstring = json_encode($json);
-    echo $jsonstring;
+mysqli_close($savienojums);
 ?>

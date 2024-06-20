@@ -1,7 +1,4 @@
 <?php
-// Assuming you generate a PDF or any other format
-// For example, save a text file with details
-
 $pieteikumiID = $_POST['pieteikumiID'];
 $price = $_POST['price'];
 
@@ -9,7 +6,11 @@ $price = $_POST['price'];
 $filename = "pieteikums_$pieteikumiID.txt";
 $fileContent = "Pieteikums ID: $pieteikumiID\nPrice: $price";
 
-file_put_contents($filename, $fileContent);
+// Ensure the file is saved in a directory accessible to the web server
+$uploads_dir = './admin'; // Adjust this path
+$filePath = "$uploads_dir/$filename";
 
-echo $filename; // Return the file path or success message
+file_put_contents($filePath, $fileContent);
+
+echo $filePath; // Return the file path
 ?>
